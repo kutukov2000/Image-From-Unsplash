@@ -1,0 +1,48 @@
+﻿<Window x:Class="download_images_http.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:download_images_http"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label VerticalAlignment="Center" Grid.Row="0">Height:</Label>
+            <TextBox x:Name="HeightTxtBox" Margin="6" Grid.Row="0" Grid.Column="1"></TextBox>
+            
+            <Label VerticalAlignment="Center"  Grid.Row="0" Grid.Column="2">Width:</Label>
+            <TextBox x:Name="WidthTxtBox" Margin="6" Grid.Row="0" Grid.Column="3"></TextBox>
+            
+            <Label VerticalAlignment="Center" Grid.Row="0" Grid.Column="4">Category:</Label>
+            <TextBox x:Name="CategoryTxtBox" Margin="6" Grid.Row="0" Grid.Column="5"></TextBox>
+        </Grid>
+        <Button Click="DownloadBtnClick" DockPanel.Dock="Bottom" Padding="10" Background="DarkCyan" Foreground="White">Download</Button>
+        <ProgressBar x:Name="progressBar" DockPanel.Dock="Bottom" Height="6" Margin="6"></ProgressBar>
+
+        <TabControl DockPanel.Dock="Top">
+            <TabItem Header="Download History">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"  TextAlignment="Center" FontSize="28">Download History</TextBlock>
+                    <ListBox DockPanel.Dock="Top" x:Name="historyList" Margin="6"></ListBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Preview">
+                <Image x:Name="previewImg"></Image>
+            </TabItem>
+        </TabControl>
+        
+        
+    </DockPanel>
+</Window>
