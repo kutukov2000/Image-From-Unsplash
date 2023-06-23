@@ -41,16 +41,30 @@ namespace download_images_http
 
             string dest = GenerateFilePath(fullUrl);
 
-            await client.DownloadFileTaskAsync(fullUrl, dest);
-
             AddToHistoryList(fullUrl);
 
-            previewImg.Source = new BitmapImage(new Uri(dest));
+            try
+            {
+                await client.DownloadFileTaskAsync(new Uri(fullUrl), dest);
+                previewImg.Source = new BitmapImage(new Uri(dest));
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.RequestCanceled)
+                {
+                    MessageBox.Show("Завантаження відмінено.");
+                }
+                else
+                {
+                    // Обробка інших типів помилок
+                    MessageBox.Show("Помилка завантаження файлу: " + ex.Message);
+                }
+            }
         }
 
         public void AddToHistoryList(string url)
         {
-            historyList.Items.Add($"{DateTime.Now.ToShortTimeString()} {Path.GetFileName(url)} {HeightTxtBox.Text}x{WidthTxtBox.Text}");
+            historyList.Items.Add($"{DateTime.Now.ToShortTimeString()} {Path.GetFileName(url).Remove(0,1)} {HeightTxtBox.Text}x{WidthTxtBox.Text}");
         }
 
         private string GenerateFilePath(string originalPath)
@@ -66,6 +80,11 @@ namespace download_images_http
 
             // combine destination path
             return Path.Combine(desktop, name + extension);
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            client.CancelAsync();
         }
     }
 }

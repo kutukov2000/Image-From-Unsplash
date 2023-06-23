@@ -6,6 +6,25 @@
         xmlns:local="clr-namespace:download_images_http"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{TemplateBinding Content}" Margin="5"/>
+                                <Button Click="Cancel_Click" Margin="5" Content="Cancel"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <DockPanel>
         <Grid DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -35,14 +54,16 @@
             <TabItem Header="Download History">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top"  TextAlignment="Center" FontSize="28">Download History</TextBlock>
-                    <ListBox DockPanel.Dock="Top" x:Name="historyList" Margin="6"></ListBox>
+                    <ListBox DockPanel.Dock="Top" x:Name="historyList" Margin="6">
+                        
+                    </ListBox>
+                    
                 </DockPanel>
             </TabItem>
             <TabItem Header="Preview">
                 <Image x:Name="previewImg"></Image>
             </TabItem>
         </TabControl>
-        
         
     </DockPanel>
 </Window>
